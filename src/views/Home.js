@@ -47,6 +47,16 @@ function Home() {
     }
 
     const handleAddCard = () => {
+        if(cardName === "" && cardContent === ""){
+            return alert('Enter card title and card content')
+        }
+        if(cardName === ""){
+            return alert('Enter card title')
+        }
+        if(cardContent === ""){
+            return alert('Enter card content')
+        }
+
         const data = columns.map(column => {
             if (column.id === columnId) {
                 return { id: column.id, columnName: column.columnName, cards: [...column.cards, { id: column.cards.length + 1, cardName: cardName, content: cardContent }] }
@@ -92,30 +102,19 @@ function Home() {
     }
 
     const handleShowMoveColumn = (cardId, columnId) => {
-
-
         setShowMoveColumnModal(true)
         setIntialColumnId(columnId)
         setIntialCardId(cardId)
-
-        // setCardContent(content)
-        // setCardName(name)
-        // setCardId(id)
-        // setShowAddCard(true)
-        // setEditCard(true)
-        // setColumnId(columnId)
     }
 
     const handelMoveColumn = (nextColumnId) => {
-        
-        const data1 = columns.find(column => column.id === intialColumnId);
-        const data2 = data1.cards.find(card => card.id === intialCardId);
-        
-        const data3 = data1.cards.filter(card => card.id !== intialCardId);
-        const data31 = data3.map((card, index) => ({ id: index+1, cardName: card.cardName, content: card.content }));
+        const intialColumnData = columns.find(column => column.id === intialColumnId);
+        const movedCard = intialColumnData.cards.find(card => card.id === intialCardId);
+        const updatedinitialCards = intialColumnData.cards.filter(card => card.id !== intialCardId);
+        const newUpdatedinitialCards = updatedinitialCards.map((card, index) => ({ id: index+1, cardName: card.cardName, content: card.content }));
         const data4 = columns.map(column => {
             if (column.id === intialColumnId) {
-                column.cards = data31
+                column.cards = newUpdatedinitialCards
                 return column
             }
             return column
@@ -123,8 +122,8 @@ function Home() {
 
         const newData = data4.map(column => {
             if(column.id === nextColumnId){
-                data2.id = column.cards.length + 1
-                return { id: column.id, columnName: column.columnName, cards: [...column.cards, data2] }
+                movedCard.id = column.cards.length + 1
+                return { id: column.id, columnName: column.columnName, cards: [...column.cards, movedCard] }
             }
             return column
         })
@@ -143,7 +142,8 @@ function Home() {
         setIntialCardId(null)
     }
 
-    return (
+    return (<>
+    <div className='menu'>Trello clone</div>
         <div className='homeContainer'>
             {columns.map(column => (<Column column={column} handleShowAddCard={handleShowAddCard}>
                 {column.cards.map(card => <Card
@@ -185,6 +185,7 @@ function Home() {
                 intialColumnId={intialColumnId}
             />
         </div>
+        </>
     )
 }
 

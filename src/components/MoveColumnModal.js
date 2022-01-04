@@ -7,7 +7,7 @@ function MoveColumnModal(props) {
             <span className="close" onClick={() => props.handleCloseMoveModal()}>&times;</span>
             <p>Move column</p>
             <p>
-            {props.columns.map(column => props.intialColumnId !== column.id && <div onClick={() => props.handelMoveColumn(column.id)}>{column.columnName}</div>)}
+            {props.columns.map(column => props.intialColumnId !== column.id && <div key={column.id} className="availableColumns" onClick={() => props.handelMoveColumn(column.id)}>{column.columnName}</div>)}
             </p>
           </div>
     

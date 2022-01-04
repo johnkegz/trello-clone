@@ -1,3 +1,16 @@
+/*menu */
+.menu{
+    width: 100%;
+    height: 50px;
+    background-color: #4CAF50;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 800;
+}
+
 /* Home */
 
 .homeContainer{
@@ -16,7 +29,9 @@
 
 .columnHeader{
     width: 400px;
-    
+    font-weight: bold;
+    font-size: 20px;
+    color: #02075d;
     background-color: rgb(199, 194, 194);
     min-height: 50px;
     border-top-left-radius: 10px;
@@ -38,16 +53,18 @@
 }
 
 /* Add Column */
-
 .addColumnContainer{
     min-width: 400px;
-    background-color: rgb(155, 136, 136);
+    background-color: #4CAF50;
     margin: 20px;
     border-radius: 10px;
     height: 50px;
     display: flex;
     align-items: center;
     padding: 10px;
+    color: #ffffff;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 /* Add Add ColumnModal */
@@ -113,21 +130,29 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 18px;
   }
 
   /* Card */
 
+.addCard{
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: rgba(0,0,0,0.7)
+}
+
 .cardContainer{
     border-radius: 10px;
-    width: 370px;
+    width: 365px;
     margin: 0 auto;
     width: 100%;
     padding: 1px;
+    margin-top: 10px
 }
 
 .cardHeader{
-    
-    width: 100%;
+    /* width: 100%; */
     background-color: rgb(255, 255, 255);
     min-height: 50px;
     border-top-left-radius: 10px;
@@ -136,15 +161,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 10px;
+    margin-bottom: -15px;
 }
 
 .cardBody{
-    width: 100%;
+    /* width: 100%; */
     background-color: rgb(255, 255, 255);
     min-height: 50px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    /* padding: 10px */
+    padding: 10px 10px;
+    color: rgba(0,0,0,0.8)
 }
 
 /* Add card modal*/
@@ -156,4 +184,44 @@ textarea{
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+/* Elipse */
+.elipse {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.elipseSelectContainer{
+    position: relative;
+}
+
+.elipseSelect{
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 5px;
+    position: absolute;
+    margin-left: -20px;
+}
+
+.elipseSelectRow {
+    cursor: pointer;
+    font-size: 15px;
+    padding: 1px;
+    color: rgba(0,0,0,0.7);
+   
+}
+
+.elipseSelectRow:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+
+.availableColumns{
+    cursor: pointer;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 20px 0px;
+    color: rgba(0,0,0,0.7);
+}
+
+.availableColumns:hover{
+    background-color: rgba(0,0,0,0.1);
 }

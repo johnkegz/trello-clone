@@ -8,7 +8,7 @@ function AddColumnModal(props) {
         <p>Label column</p>
         <p>
             <input type='text' width='100%' name='column' value={props.columnName} value={props.columnName} onChange={(e) => props.setColumnName(e.target.value)}/>
-            <input type='submit' value='Add' onClick={() => props.handleAddColumn()}/>
+            <input type='submit' value='Add' onClick={() => props.columnName !==""?props.handleAddColumn(): alert('Enter column name')}/>
         </p>
       </div>
 

@@ -4,15 +4,12 @@ import AddColumn from '../components/AddColumn'
 import AddColumnModal from '../components/AddColumnModal'
 import Card from '../components/Card'
 import Column from '../components/Column'
+import MoveColumnModal from '../components/MoveColumnModal'
 import '../styles/styles.css'
 
 function Home() {
     const [showAddColumnModal, setShowAddColumnModal] = React.useState(false);
-    const [columns, setColumns] = React.useState([{
-        id: 1, columnName: 'kalyangno', cards: [
-            { id: 1, cardName: 'EPIC', content: 'Klayango' },
-        ]
-    }]);
+    const [columns, setColumns] = React.useState([]);
     const [columnName, setColumnName] = React.useState('');
     const [showAddCard, setShowAddCard] = React.useState(false);
     const [cardName, setCardName] = React.useState('');
@@ -20,6 +17,10 @@ function Home() {
     const [cardId, setCardId] = React.useState(null);
     const [editCard, setEditCard] = React.useState(false);
     const [columnId, setColumnId] = React.useState(null);
+    const [showMoveColumnModal, setShowMoveColumnModal] = React.useState(false);
+    const [intialColumnId, setIntialColumnId] = React.useState(null);
+    const [intialCardId, setIntialCardId] = React.useState(null);
+
 
     const handleClose = () => {
         setShowAddColumnModal(false)
@@ -44,8 +45,6 @@ function Home() {
         setColumnId(columnId)
         return
     }
-
-
 
     const handleAddCard = () => {
         const data = columns.map(column => {
@@ -92,6 +91,58 @@ function Home() {
         setColumns(data)
     }
 
+    const handleShowMoveColumn = (cardId, columnId) => {
+
+
+        setShowMoveColumnModal(true)
+        setIntialColumnId(columnId)
+        setIntialCardId(cardId)
+
+        // setCardContent(content)
+        // setCardName(name)
+        // setCardId(id)
+        // setShowAddCard(true)
+        // setEditCard(true)
+        // setColumnId(columnId)
+    }
+
+    const handelMoveColumn = (nextColumnId) => {
+        
+        const data1 = columns.find(column => column.id === intialColumnId);
+        const data2 = data1.cards.find(card => card.id === intialCardId);
+        
+        const data3 = data1.cards.filter(card => card.id !== intialCardId);
+        const data31 = data3.map((card, index) => ({ id: index+1, cardName: card.cardName, content: card.content }));
+        const data4 = columns.map(column => {
+            if (column.id === intialColumnId) {
+                column.cards = data31
+                return column
+            }
+            return column
+        });
+
+        const newData = data4.map(column => {
+            if(column.id === nextColumnId){
+                data2.id = column.cards.length + 1
+                return { id: column.id, columnName: column.columnName, cards: [...column.cards, data2] }
+            }
+            return column
+        })
+
+        setColumns(newData)
+        setShowMoveColumnModal(false)
+        setIntialColumnId(null)
+        setIntialCardId(null)
+        return
+    }
+
+    const handleCloseMoveModal = () => {
+        setShowMoveColumnModal(false)
+        setShowMoveColumnModal(false)
+        setIntialColumnId(null)
+        setIntialCardId(null)
+    }
+
     return (
         <div className='homeContainer'>
             {columns.map(column => (<Column column={column} handleShowAddCard={handleShowAddCard}>
@@ -102,6 +153,7 @@ function Home() {
                     columnId={column.id}
                     key={card.id}
                     handleShowEdit={handleShowEdit}
+                    handleShowMoveColumn={handleShowMoveColumn}
                 />)}
             </Column>))}
             <AddColumn setShowAddColumnModal={setShowAddColumnModal} />
@@ -124,6 +176,13 @@ function Home() {
                 handleEdit={handleEdit}
                 editCard={editCard}
                 columnID={columnId}
+            />
+            <MoveColumnModal 
+                showMoveColumnModal={showMoveColumnModal}
+                columns={columns}
+                handelMoveColumn={handelMoveColumn}
+                handleCloseMoveModal={handleCloseMoveModal}
+                intialColumnId={intialColumnId}
             />
         </div>
     )

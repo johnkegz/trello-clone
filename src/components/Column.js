@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/styles.css'
 import Card from './Card'
 
-function Column(props) {console.log(props)
+function Column(props) {
     return (
         <div className='columnContainer'>
             <div className='columnHeader'>

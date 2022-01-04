@@ -1,6 +1,6 @@
 # Trello clone
 ## How to test the application
-- Clone the repo
+- Clone the repo `git clone https://github.com/johnkegz/trello-clone.git`
 - Run npm run install
 - Run npm run start
 
